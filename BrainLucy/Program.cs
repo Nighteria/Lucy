@@ -15,7 +15,7 @@ namespace BrainLucy
         {
             Vocabulaire vocabulaire = new Vocabulaire(); //  charge le vocabulaire de l'ia
             vocabulaire.lireFichierXML();
-                                                         //  Listen listen = new Listen(); // ecoute l'user parler
+           // Listen listen = new Listen(); // ecoute l'user parler
             Console.ReadLine();
         }
 

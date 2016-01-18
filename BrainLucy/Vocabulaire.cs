@@ -14,6 +14,8 @@ namespace BrainLucy
     class Vocabulaire
     {
         Choices choix = new Choices();
+        //création map de liste de mot  
+        Dictionary <string, List<String>> map = new Dictionary<string, List<String>>();
 
         public Vocabulaire() // class utilisé pour  gérer le vocabulaire de l'IA
         {
@@ -24,13 +26,12 @@ namespace BrainLucy
         public void lireFichierXML()
         {
             //charge le fichier xml
-            XDocument monXml = XDocument.Load("G:/projet/xml/test.xml");
+            XDocument monXml = XDocument.Load("E:/projet/xml/test.xml");
             XPathNavigator xpathNavigator = monXml.CreateNavigator();
             //selectionne tout les noeuds phrase
             XPathNodeIterator xpathNodeIterator = xpathNavigator.Select("donnees/phrase");
 
-            //création map de liste de mot  
-            Dictionary<string, List<String>> map = new Dictionary<string, List<String>> ();
+          
 
             //parcour tout les noeuds phrase
             while (xpathNodeIterator.MoveNext())
@@ -40,30 +41,34 @@ namespace BrainLucy
                 List<String> SousListe = new List<String>();    
                 XPathNodeIterator xpathNodeIteratormot =xpathNodeIterator.Current.Select("mot");
                 string attribut = xpathNodeIterator.Current.GetAttribute("name", String.Empty);
+                
 
                 while (xpathNodeIteratormot.MoveNext()) //parcours les mots
                 {
+
                     string mot = xpathNodeIteratormot.Current.Value.ToString().Trim();
                     // envoie de la valeur à liste choix            
-                    this.choix.Add(xpathNodeIteratormot.Current.Value.ToString().Trim());
-                    SousListe.Add(xpathNodeIteratormot.Current.Value.ToString().Trim());
+                    this.choix.Add(mot);
+                    
+                    Console.WriteLine(mot);
+                    SousListe.Add(mot);
                     //envoi la sous liste à la grosse liste
 
                 }
-                map.Add(attribut, SousListe);
-
+                this.map.Add(attribut, SousListe);
+                
             }
             
             //parcour la map pour afficher les valeur et leur clé
-           for (int i = 0; i< map.Count;i++ )
+           for (int i = 0; i< this.map.Count;i++ )
             {
-               List<String> elem = map.Values.ElementAt(i);      
-                Console.WriteLine(map.Keys.ElementAt(i));
+               List<String> elem = this.map.Values.ElementAt(i);      
+                //Console.WriteLine(map.Keys.ElementAt(i));
 
                 foreach (string valeur in elem)
                 {
                     String pipi = valeur;
-                     Console.WriteLine("mot: " + pipi);
+                   //  Console.WriteLine("mot: " + pipi);
                 }
             }
     
@@ -77,8 +82,8 @@ namespace BrainLucy
 
             //construction grammaire
             GrammarBuilder builder = new GrammarBuilder();
-            builder.Append(this.choix);
-
+            builder.Append(getChoix());
+            builder.Append(new Choices (new string[] { "test" }));
             //charge grammaire
             Grammar grammar = new Grammar(builder);
             grammar.Name = "listeMot";
@@ -94,7 +99,12 @@ namespace BrainLucy
 
         public Choices getChoix()
         {
-            return choix;
+            return this.choix;
+        }
+
+        public Dictionary<string, List<String>> getMapValue() // retourne tout les mots de la grammaire avec ses attributs
+        {
+            return this.map;
         }
 
     }

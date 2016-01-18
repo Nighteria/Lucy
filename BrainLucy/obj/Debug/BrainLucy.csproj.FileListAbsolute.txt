@@ -10,3 +10,9 @@ G:\projet\Lucy\BrainLucy\BrainLucy\obj\Debug\BrainLucy.pdb
 G:\projet\Lucy\BrainLucy\BrainLucy\bin\Debug\BrainLucy.exe
 G:\projet\Lucy\BrainLucy\BrainLucy\bin\Debug\BrainLucy.pdb
 G:\projet\Lucy\BrainLucy\BrainLucy\obj\Debug\BrainLucy.csprojResolveAssemblyReference.cache
+E:\projet\Lucy\BrainLucy\bin\Debug\BrainLucy.exe.config
+E:\projet\Lucy\BrainLucy\bin\Debug\BrainLucy.exe
+E:\projet\Lucy\BrainLucy\bin\Debug\BrainLucy.pdb
+E:\projet\Lucy\BrainLucy\obj\Debug\BrainLucy.csprojResolveAssemblyReference.cache
+E:\projet\Lucy\BrainLucy\obj\Debug\BrainLucy.exe
+E:\projet\Lucy\BrainLucy\obj\Debug\BrainLucy.pdb

@@ -11,11 +11,11 @@ namespace BrainLucy
 {
     class Listen
     {
+        Vocabulaire vocabulaire = new Vocabulaire();
 
 
-        public  Listen() // ecoute l'user parler
+        public Listen() // ecoute l'user parler
         {
-
 
 
             // Create an in-process speech recognizer for the en-US locale.
@@ -26,11 +26,14 @@ namespace BrainLucy
             {
 
                 // crée et charge la grammaire grammar.
-                Vocabulaire vocabulaire = new Vocabulaire();
-                Console.WriteLine(vocabulaire.recupererVocabulaire().Enabled);
-                recognizer.LoadGrammar(vocabulaire.recupererVocabulaire());
+
+                this.vocabulaire.lireFichierXML();
+                //     Console.WriteLine(vocabulaire.recupererVocabulaire().Enabled);
+                recognizer.LoadGrammar(this.vocabulaire.recupererVocabulaire());
 
                 // Add un event for the speech recognized event.
+                recognizer.EmulateRecognize("allume");
+
                 recognizer.SpeechRecognized +=
                   new EventHandler<SpeechRecognizedEventArgs>(recognizer_SpeechRecognized);
 
@@ -38,41 +41,40 @@ namespace BrainLucy
                 recognizer.SetInputToDefaultAudioDevice();
 
                 // Start asynchronous, continuous speech recognition.
-               recognizer.RecognizeAsync(RecognizeMode.Multiple);
+                recognizer.RecognizeAsync(RecognizeMode.Multiple);
 
                 // Keep the console window open.
                 while (true)
                 {
-                  //  recognizer.EmulateRecognize("test");
 
                     Console.ReadLine();
                 }
 
             }
-           
 
 
-           
+
+
         }
 
 
         // lance  l'event SpeechRecognized .
-        static void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+         void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             Console.WriteLine("Text: " + e.Result.Text);
-
+            
+            motReconnu(e.Result.Text);
 
         }
 
-        public static void motReconnu()
+        public  void motReconnu(string motReconnu)
         {
-
-            Vocabulaire vocabulaire2 = new Vocabulaire();
-            Dictionary<string, List<String>> map = vocabulaire2.getMapValue();
+            
+            Dictionary<string, List<String>> map = this.vocabulaire.getMapValue();
             for (int i = 0; i < map.Count; i++)
             {
                 List<String> elem = map.Values.ElementAt(i);
-                //Console.WriteLine(map.Keys.ElementAt(i));
+                Console.WriteLine(map.Keys.ElementAt(i));
 
                 foreach (string valeur in elem)
                 {

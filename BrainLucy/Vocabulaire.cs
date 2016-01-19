@@ -26,7 +26,7 @@ namespace BrainLucy
         public void lireFichierXML()
         {
             //charge le fichier xml
-            XDocument monXml = XDocument.Load("E:/projet/xml/test.xml");
+            XDocument monXml = XDocument.Load("G:/projet/xml/test.xml");
             XPathNavigator xpathNavigator = monXml.CreateNavigator();
             //selectionne tout les noeuds phrase
             XPathNodeIterator xpathNodeIterator = xpathNavigator.Select("donnees/phrase");
@@ -86,9 +86,9 @@ namespace BrainLucy
 
             //construction grammaire
             GrammarBuilder builder = new GrammarBuilder();
-            builder.Append(new Choices(new string[] { "Anne", "Mary" }));
+            //  builder.Append(new Choices(new string[] { "Anne", "Mary" }));
             // builder = getChoix().ToGrammarBuilder();
-            //builder.Append(getChoix());
+            builder.Append(this.choix);
             //charge grammaire
             Grammar grammar = new Grammar(builder);
             grammar.Name = "listeMot";
@@ -99,22 +99,12 @@ namespace BrainLucy
 
         public void setChoix(string mot)
         {
-            Console.WriteLine("mot reçu " + mot);
-
             this.choix.Add(mot);
         
-
         }
 
         public Choices getChoix()
         {
-            //////////////test
-            Choices choix = new Choices();
-            choix.Add("toto");
-            choix.Add("raaaaaa");
-            choix.Add("sss");
-          
-            ///////////////////////
             return this.choix;
         }
 

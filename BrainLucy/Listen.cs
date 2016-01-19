@@ -27,8 +27,8 @@ namespace BrainLucy
 
                 // crée et charge la grammaire grammar.
                 Vocabulaire vocabulaire = new Vocabulaire();
-              //  Console.WriteLine(vocabulaire.recupererVocabulaire().Enabled);
-               recognizer.LoadGrammar(vocabulaire.recupererVocabulaire());
+                Console.WriteLine(vocabulaire.recupererVocabulaire().Enabled);
+                recognizer.LoadGrammar(vocabulaire.recupererVocabulaire());
 
                 // Add un event for the speech recognized event.
                 recognizer.SpeechRecognized +=

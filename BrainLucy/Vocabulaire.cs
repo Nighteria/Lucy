@@ -31,7 +31,7 @@ namespace BrainLucy
             //selectionne tout les noeuds phrase
             XPathNodeIterator xpathNodeIterator = xpathNavigator.Select("donnees/phrase");
 
-          
+
 
             //parcour tout les noeuds phrase
             while (xpathNodeIterator.MoveNext())
@@ -40,19 +40,23 @@ namespace BrainLucy
                 //création liste de mot
                 List<String> SousListe = new List<String>();    
                 XPathNodeIterator xpathNodeIteratormot =xpathNodeIterator.Current.Select("mot");
+
                 string attribut = xpathNodeIterator.Current.GetAttribute("name", String.Empty);
-                
+                //nombre de mot
+                //int nombreMot = (int)xpathNodeIteratormot.Count;
 
                 while (xpathNodeIteratormot.MoveNext()) //parcours les mots
                 {
 
                     string mot = xpathNodeIteratormot.Current.Value.ToString().Trim();
-                    // envoie de la valeur à liste choix            
-                    this.choix.Add(mot);
-                    
-                    Console.WriteLine(mot);
-                    SousListe.Add(mot);
-                    //envoi la sous liste à la grosse liste
+                    // envoie de la valeur à liste choix    
+                    if (mot != null)
+                    {
+                        setChoix(mot);
+                        SousListe.Add(mot);
+                        //envoi la sous liste à la grosse liste
+                    }
+
 
                 }
                 this.map.Add(attribut, SousListe);
@@ -82,8 +86,9 @@ namespace BrainLucy
 
             //construction grammaire
             GrammarBuilder builder = new GrammarBuilder();
-            builder.Append(getChoix());
-            builder.Append(new Choices (new string[] { "test" }));
+            builder.Append(new Choices(new string[] { "Anne", "Mary" }));
+            // builder = getChoix().ToGrammarBuilder();
+            //builder.Append(getChoix());
             //charge grammaire
             Grammar grammar = new Grammar(builder);
             grammar.Name = "listeMot";
@@ -92,13 +97,24 @@ namespace BrainLucy
 
         }
 
-        public void setChoix(Choices choix)
+        public void setChoix(string mot)
         {
-            this.choix = choix;//
+            Console.WriteLine("mot reçu " + mot);
+
+            this.choix.Add(mot);
+        
+
         }
 
         public Choices getChoix()
         {
+            //////////////test
+            Choices choix = new Choices();
+            choix.Add("toto");
+            choix.Add("raaaaaa");
+            choix.Add("sss");
+          
+            ///////////////////////
             return this.choix;
         }
 

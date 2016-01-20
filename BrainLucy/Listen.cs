@@ -63,14 +63,14 @@ namespace BrainLucy
         {
             Console.WriteLine("Text: " + e.Result.Text);
             
-            motReconnu(e.Result.Text);
 
         }
 
         public  void motReconnu(string motReconnu)
         {
-            
             Dictionary<string, List<String>> map = this.vocabulaire.getMapValue();
+
+            
             for (int i = 0; i < map.Count; i++)
             {
                 List<String> elem = map.Values.ElementAt(i);

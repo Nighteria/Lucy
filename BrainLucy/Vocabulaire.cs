@@ -94,26 +94,57 @@ namespace BrainLucy
 
 
             //parcour liste key des mot reconnu
-            string TableauEnChaineTest = "testName||testName||vale||lol||testName";
+            string TableauEnChaineTest = "testName|testName|vale|lol|testName";
             string keyAllOccurence = "";
             int nombreOccurence = 0;
+
+
+
+
+
+            string[] words = TableauEnChaineTest.Split('|');
+
+            Dictionary<string, int> oddw = new Dictionary<string, int>();
+            
+            foreach (string item in words)
+            {
+                if (item != "")
+                {
+                    if (oddw.ContainsKey(item) == false)
+                    {
+                        oddw.Add(item, 1);
+                    }
+                    else
+                    {
+                        oddw[item]++;
+                    }
+                }
+            }
+
+            foreach (var item in oddw)
+            {
+                Console.WriteLine(item);
+                item.Value
+
+            }
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
 
             foreach (string key in listeKeyMotReconnu)
             {
 
-
-                MatchCollection matches = Regex.Matches(TableauEnChaineTest, key);
-                Console.WriteLine("there was {0} matches for '{1}'", matches.Count, key);
-                Console.WriteLine(nombreOccurence);
-
-                if (nombreOccurence > matches.Count)
-                {
-                    keyAllOccurence = key;
-
-                    Console.WriteLine("voici le winner: "+keyAllOccurence);
-                    nombreOccurence = matches.Count;
-
-                }
 
                 //    Console.WriteLine("KEY : "+ key);
 

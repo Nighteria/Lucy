@@ -62,26 +62,72 @@ namespace BrainLucy
          void recognizer_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             Console.WriteLine("Text: " + e.Result.Text);
-            
 
+            lireKeyMotReconnu(e.Result.Text);
         }
 
-        public  void motReconnu(string motReconnu)
+        public  void lireKeyMotReconnu(string motReconnu)
         {
+
             Dictionary<string, List<String>> map = this.vocabulaire.getMapValue();
 
-            
+            //     string[] words = this.vocabulaire.getTableauKeyString().Split('|');
+
+            //=====acculer 5 fois et executer cette methode
+
+
+            //======================
+            string TableauEnChaine = "";
+
             for (int i = 0; i < map.Count; i++)
             {
                 List<String> elem = map.Values.ElementAt(i);
-                Console.WriteLine(map.Keys.ElementAt(i));
+             //  Console.WriteLine(map.Keys.ElementAt(i));
+                string key = map.Keys.ElementAt(i);
+
 
                 foreach (string valeur in elem)
                 {
-                    String pipi = valeur;
-                    Console.WriteLine("mot: " + pipi);
+                    if (motReconnu == valeur)
+                    {
+                        TableauEnChaine += key + "|";
+                    }
                 }
             }
+            //======================
+
+
+
+            string[] words = TableauEnChaine.Split('|');//tableau de k
+            Console.WriteLine("tab: " + this.vocabulaire.getTableauKeyString());
+
+            string plusGrandOccurence = "";
+            int val = 0;
+            Dictionary<string, int> boxKey = new Dictionary<string, int>();
+
+            foreach (string item in words)
+            {
+                if (item != "")
+                {
+                    if (boxKey.ContainsKey(item) == false)
+                    {
+                        boxKey.Add(item, 1);
+                    }
+                    else
+                    {
+                        boxKey[item]++;
+                        if ((boxKey[item]) > val) // recupere la key avec la plus grande pertinance
+                        {
+                            plusGrandOccurence = item;
+                            val = boxKey[item];
+                        }
+
+
+                    }
+                }
+            }
+            Console.WriteLine("plus grand est : " + plusGrandOccurence);
+
 
         }
 

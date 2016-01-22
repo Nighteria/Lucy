@@ -18,6 +18,7 @@ namespace BrainLucy
         Choices choix = new Choices();
         //création map de liste de mot  
         Dictionary <string, List<String>> map = new Dictionary<string, List<String>>();
+        string TableauEnChaine = ""; //tableau de key
 
         public Vocabulaire() // class utilisé pour  gérer le vocabulaire de l'IA
         {
@@ -66,9 +67,9 @@ namespace BrainLucy
             }
 
             //parcour la map pour afficher les valeur et leur clé
+/*
             string motRecuTest = "test";
             List<string> listeKeyMotReconnu = new List<string>();
-            string TableauEnChaine = "";
 
             for (int i = 0; i< this.map.Count;i++ )
             {
@@ -77,97 +78,20 @@ namespace BrainLucy
                 string key = map.Keys.ElementAt(i);
                 foreach (string valeur in elem)
                 {
-                    String pipi = valeur;
-                //    Console.WriteLine("mot: " + pipi);
-                    if(motRecuTest == pipi)
+                    if(motRecuTest == valeur)
                     {
-                        //  Console.WriteLine("mot recu = mot Dico");
-                        listeKeyMotReconnu.Add("nyyaa"); // ajoute
-
-                        listeKeyMotReconnu.Add(key); // ajoute
-                        listeKeyMotReconnu.Add("noooo"); // ajoute
-                        listeKeyMotReconnu.Add("testName"); // ajoute
-                        TableauEnChaine += key + "||";
+ 
+                        listeKeyMotReconnu.Add(key); // ajoute       
+                        this.TableauEnChaine += key + "|";
                     }
                 }
             }
 
-
+            */
             //parcour liste key des mot reconnu
-            string TableauEnChaineTest = "testName|testName|vale|lol|testName";
-            string keyAllOccurence = "";
-            int nombreOccurence = 0;
-
-
-
-
-
-            string[] words = TableauEnChaineTest.Split('|');
-
-            Dictionary<string, int> oddw = new Dictionary<string, int>();
-            
-            foreach (string item in words)
-            {
-                if (item != "")
-                {
-                    if (oddw.ContainsKey(item) == false)
-                    {
-                        oddw.Add(item, 1);
-                    }
-                    else
-                    {
-                        oddw[item]++;
-                    }
-                }
-            }
-
-            foreach (var item in oddw)
-            {
-                Console.WriteLine(item);
-                item.Value
-
-            }
-      
+          //  string TableauEnChaineTest = "testName|testName|vale|lol|testName|vale|vale|vale";
+       
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-            foreach (string key in listeKeyMotReconnu)
-            {
-
-
-                //    Console.WriteLine("KEY : "+ key);
-
-                //  Console.WriteLine(TableauEnChaineTest);
-
-
-
-
-                /*
-                
-                                     string searchTerm =  key ;
-
-                          //recherche requete link pour retourner nombre occurence
-                          var matchQuery = from word in listeKeyMotReconnu
-                                           where word.ToLowerInvariant() == searchTerm.ToLowerInvariant()
-                                           select word;
-
-                          // Count the matches, which executes the query.
-                          int wordCount = matchQuery.Count();
-                          Console.WriteLine("{0} occurrences(s) of the search term \"{1}\" were found.", wordCount, searchTerm);
-                          */
-            }
-
 
 
         }
@@ -199,6 +123,12 @@ namespace BrainLucy
         public Choices getChoix()
         {
             return this.choix;
+        }
+
+
+        public string getTableauKeyString()
+        {
+            return this.TableauEnChaine;
         }
 
         public Dictionary<string, List<String>> getMapValue() // retourne tout les mots de la grammaire avec ses attributs
